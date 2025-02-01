@@ -1,3 +1,7 @@
+v22.2.1
+- Translations updates from Weblate
+	- af_za, es_es, fi_fi, it_it, pt_br
+
 v22.2.0
 - PVR Add-on API v9.2.0
 
