@@ -5,15 +5,15 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
-"PO-Revision-Date: 2025-07-28 01:41+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2025-09-01 07:29+0000\n"
+"Last-Translator: Cutter <CutterXYZ@users.noreply.github.com>\n"
 "Language-Team: French (France) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-plutotv/fr_fr/>\n"
 "Language: fr_fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.13\n"
 
 msgctxt "Addon Summary"
 msgid "Pluto.tv PVR Client"
@@ -25,23 +25,23 @@ msgstr "Client PVR Pluto.tv . Remarque : ceci n'est pas un module complémentair
 
 msgctxt "#30001"
 msgid "Playback"
-msgstr ""
+msgstr "Lecture"
 
 msgctxt "#30002"
 msgid "Channels"
-msgstr ""
+msgstr "Chaînes"
 
 msgctxt "#30008"
 msgid "First channel number"
-msgstr ""
+msgstr "Numéro de la première chaîne"
 
 msgctxt "#30009"
 msgid "Workaround for broken streams (requires inputstream.adaptive > 21.4.5)"
-msgstr ""
+msgstr "Solution de contournement pour les flux interrompus (requiert inputstream.adaptive > 21.4.5)"
 
 msgctxt "#30010"
 msgid "Coloured channel logos"
-msgstr ""
+msgstr "Logos de chaînes colorés"
 
 msgctxt "#30040"
 msgid "Debug"
@@ -57,27 +57,27 @@ msgstr "ID du dispositif"
 
 msgctxt "#30100"
 msgid "Category containing playback settings"
-msgstr ""
+msgstr "Catégorie contenant les paramètres de lecture"
 
 msgctxt "#30101"
 msgid "Enable special stream handling to avoid hangs during playback."
-msgstr ""
+msgstr "Activer le traitement spécial des flux permettant d'éviter les interruptions de lecture."
 
 msgctxt "#30200"
 msgid "Category containing channel settings"
-msgstr ""
+msgstr "Catégorie contenant les paramètres de chaînes"
 
 msgctxt "#30201"
 msgid "The number for the first channel. Useful if you have multiple PVR clients enabled - to group the channels from the different clients."
-msgstr ""
+msgstr "Le numéro de la première chaîne. Utile si vous avez plusieurs clients enregistreurs vidéo (PVR) actifs, pour grouper les chaînes des différents clients."
 
 msgctxt "#30202"
 msgid "Use coulored channel logos, if available."
-msgstr ""
+msgstr "Utiliser des logos de chaînes colorés, si disponibles."
 
 msgctxt "#30300"
 msgid "Category containing debug settings"
-msgstr ""
+msgstr "Catégorie contenant les paramètres de débogage"
 
 #~ msgctxt "#30001"
 #~ msgid "General"
