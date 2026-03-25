@@ -401,8 +401,9 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
         tag.SetUniqueChannelId(channel.iUniqueId);
 
         // set title
-        tag.SetTitle(epgData.at("title"));
-        kodi::Log(ADDON_LOG_DEBUG, "[epg] title: %s;", nlohmann::to_string(epgData.at("title")).c_str());
+        const std::string title{epgData.at("title")};
+        tag.SetTitle(title);
+        kodi::Log(ADDON_LOG_DEBUG, "[epg] title: %s;", title.c_str());
 
         // startTime
         std::string startTime = epgData.at("start");
@@ -416,39 +417,43 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
         {
           const auto& episode = epgData.at("episode");
           // description
-          if (episode.contains("description") && episode.at("description"))
+          if (episode.contains("description") && episode.at("description").is_string())
           {
-            tag.SetPlot(episode.at("description"));
-            kodi::Log(ADDON_LOG_DEBUG, "[epg] episode description: %s;", nlohmann::to_string(episode.at("description")).c_str());
+            const std::string plot{episode.at("description")};
+            tag.SetPlot(plot);
+            kodi::Log(ADDON_LOG_DEBUG, "[epg] episode description: %s;", plot.c_str());
           }
 
           // genre
-          if (episode.contains("genre") && episode.at("genre"))
+          if (episode.contains("genre") && episode.at("genre").is_string())
           {
             tag.SetGenreType(EPG_GENRE_USE_STRING);
-            tag.SetGenreDescription(episode.at("genre"));
-            kodi::Log(ADDON_LOG_INFO, "[epg]] episode genre: %s", nlohmann::to_string(episode.at("genre")).c_str());
+            const std::string genreDesc{episode.at("genre")};
+            tag.SetGenreDescription(genreDesc);
+            kodi::Log(ADDON_LOG_DEBUG, "[epg]] episode genre: %s", genreDesc.c_str());
           }
 
           // thumbnail
-          if (episode.contains("thumbnail") && episode.at("thumbnail").at("path"))
+          if (episode.contains("thumbnail") && episode.at("thumbnail").at("path").is_string())
           {
-            tag.SetIconPath(episode.at("thumbnail").at("path"));
-            kodi::Log(ADDON_LOG_INFO, "[epg]] episode thumbnail: %s", nlohmann::to_string(episode.at("thumbnail").at("path")).c_str());
+            const std::string iconPath{episode.at("thumbnail").at("path")};
+            tag.SetIconPath(iconPath);
+            kodi::Log(ADDON_LOG_DEBUG, "[epg]] episode thumbnail: %s", iconPath.c_str());
           }
 
           // first aired
-          if (episode.contains("firstAired") && episode.at("firstAired"))
+          if (episode.contains("firstAired") && episode.at("firstAired").is_string())
           {
-            tag.SetFirstAired(episode.at("firstAired"));
-            kodi::Log(ADDON_LOG_INFO, "[epg] episode first aired: %s", nlohmann::to_string(episode.at("firstAired")).c_str());
+            const std::string firstAired{episode.at("firstAired")};
+            tag.SetFirstAired(firstAired);
+            kodi::Log(ADDON_LOG_DEBUG, "[epg] episode first aired: %s", firstAired.c_str());
           }
 
           // parental rating (as age number,"FSK-*", "Not Rated")
-          if (episode.contains("rating") && episode.at("rating"))
+          if (episode.contains("rating") && episode.at("rating").is_string())
           {
             const std::string ratingString{episode.at("rating")};
-            kodi::Log(ADDON_LOG_INFO, "[epg] episode rating: %s", ratingString.c_str());
+            kodi::Log(ADDON_LOG_DEBUG, "[epg] episode rating: %s", ratingString.c_str());
 
             // rating as string
             tag.SetParentalRatingCode(ratingString);
@@ -462,31 +467,36 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
           }
 
           // season number
-          if (episode.contains("season") && episode.at("season"))
+          if (episode.contains("season") && episode.at("season").is_number_integer())
           {
-            tag.SetSeriesNumber(episode.at("season"));
-            kodi::Log(ADDON_LOG_DEBUG, "[epg] season number: %s;", nlohmann::to_string(episode.at("season")).c_str());
+            const int seriesNum{episode.at("season")};
+            tag.SetSeriesNumber(seriesNum);
+            kodi::Log(ADDON_LOG_DEBUG, "[epg] season number: %i", seriesNum);
           }
 
           // episode number
-          if (episode.contains("number") && episode.at("number"))
+          if (episode.contains("number") && episode.at("number").is_number_integer())
           {
-            tag.SetEpisodeNumber(episode.at("number"));
-            kodi::Log(ADDON_LOG_DEBUG, "[epg] episode number: %s;", nlohmann::to_string(episode.at("number")).c_str());
+            const int episodeNum{episode.at("number")};
+            tag.SetEpisodeNumber(episodeNum);
+            kodi::Log(ADDON_LOG_DEBUG, "[epg] episode number: %i", episodeNum);
           }
 
           // series title / episode name
           if (episode.contains("series") && episode.at("series").contains("name") &&
-              episode.at("series").at("name") && episode.contains("name") &&
-              episode.at("name"))
+              episode.at("series").at("name").is_string() && episode.contains("name") &&
+              episode.at("name").is_string())
           {
             // series title
-            tag.SetTitle(episode.at("series").at("name"));
-            kodi::Log(ADDON_LOG_DEBUG, "[epg] series title: %s;", nlohmann::to_string(episode.at("series").at("name")).c_str());
+
+            const std::string seriesTitle{episode.at("series").at("name")};
+            tag.SetTitle(seriesTitle);
+            kodi::Log(ADDON_LOG_DEBUG, "[epg] series title: %s", seriesTitle.c_str());
 
             // episode name
-            tag.SetEpisodeName(episode.at("name"));
-            kodi::Log(ADDON_LOG_DEBUG, "[epg] episode name: %s;", nlohmann::to_string(episode.at("name")).c_str());
+            const std::string episodeName{episode.at("name")};
+            tag.SetEpisodeName(episodeName);
+            kodi::Log(ADDON_LOG_DEBUG, "[epg] episode name: %s", episodeName.c_str());
 
             // set is series
             tag.SetFlags(EPG_TAG_FLAG_IS_SERIES);

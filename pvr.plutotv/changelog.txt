@@ -1,3 +1,8 @@
+v22.2.7
+- Translations updates from Weblate
+- Change json parser from RapidJson to nlohmann::json.
+- Misc code cleanup and optimizations.
+
 v22.2.6
 - Translations updates from Weblate
 - EPG: Add support for season number and episode number.
