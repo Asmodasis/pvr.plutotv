@@ -427,28 +427,28 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
           {
             tag.SetGenreType(EPG_GENRE_USE_STRING);
             tag.SetGenreDescription(episode.at("genre"));
-            kodi::Log(ADDON_LOG_INFO, "[epg]] episode genre: %s", nlohmann::to_string(episode.at("genre")).c_str());
+            kodi::Log(ADDON_LOG_DEBUG, "[epg]] episode genre: %s", nlohmann::to_string(episode.at("genre")).c_str());
           }
 
           // thumbnail
           if (episode.contains("thumbnail") && episode.at("thumbnail").at("path"))
           {
             tag.SetIconPath(episode.at("thumbnail").at("path"));
-            kodi::Log(ADDON_LOG_INFO, "[epg]] episode thumbnail: %s", nlohmann::to_string(episode.at("thumbnail").at("path")).c_str());
+            kodi::Log(ADDON_LOG_DEBUG, "[epg]] episode thumbnail: %s", nlohmann::to_string(episode.at("thumbnail").at("path")).c_str());
           }
 
           // first aired
           if (episode.contains("firstAired") && episode.at("firstAired"))
           {
             tag.SetFirstAired(episode.at("firstAired"));
-            kodi::Log(ADDON_LOG_INFO, "[epg] episode first aired: %s", nlohmann::to_string(episode.at("firstAired")).c_str());
+            kodi::Log(ADDON_LOG_DEBUG, "[epg] episode first aired: %s", nlohmann::to_string(episode.at("firstAired")).c_str());
           }
 
           // parental rating (as age number,"FSK-*", "Not Rated")
           if (episode.contains("rating") && episode.at("rating"))
           {
             const std::string ratingString{episode.at("rating")};
-            kodi::Log(ADDON_LOG_INFO, "[epg] episode rating: %s", ratingString.c_str());
+            kodi::Log(ADDON_LOG_DEBUG, "[epg] episode rating: %s", ratingString.c_str());
 
             // rating as string
             tag.SetParentalRatingCode(ratingString);
