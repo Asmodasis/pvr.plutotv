@@ -417,7 +417,7 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
         {
           const auto& episode = epgData.at("episode");
           // description
-          if (episode.contains("description") && episode.at("description"))
+          if (episode.contains("description") && episode.at("description").is_string())
           {
             const std::string plot{episode.at("description")};
             tag.SetPlot(plot);
@@ -425,7 +425,7 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
           }
 
           // genre
-          if (episode.contains("genre") && episode.at("genre"))
+          if (episode.contains("genre") && episode.at("genre").is_string())
           {
             tag.SetGenreType(EPG_GENRE_USE_STRING);
             const std::string genreDesc{episode.at("genre")};
@@ -434,7 +434,7 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
           }
 
           // thumbnail
-          if (episode.contains("thumbnail") && episode.at("thumbnail").at("path"))
+          if (episode.contains("thumbnail") && episode.at("thumbnail").at("path").is_string())
           {
             const std::string iconPath{episode.at("thumbnail").at("path")};
             tag.SetIconPath(iconPath);
@@ -442,7 +442,7 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
           }
 
           // first aired
-          if (episode.contains("firstAired") && episode.at("firstAired"))
+          if (episode.contains("firstAired") && episode.at("firstAired").is_string())
           {
             const std::string firstAired{episode.at("firstAired")};
             tag.SetFirstAired(firstAired);
@@ -450,7 +450,7 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
           }
 
           // parental rating (as age number,"FSK-*", "Not Rated")
-          if (episode.contains("rating") && episode.at("rating"))
+          if (episode.contains("rating") && episode.at("rating").is_string())
           {
             const std::string ratingString{episode.at("rating")};
             kodi::Log(ADDON_LOG_DEBUG, "[epg] episode rating: %s", ratingString.c_str());
@@ -467,7 +467,7 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
           }
 
           // season number
-          if (episode.contains("season") && episode.at("season"))
+          if (episode.contains("season") && episode.at("season").is_number_integer())
           {
             const int seriesNum{episode.at("season")};
             tag.SetSeriesNumber(seriesNum);
@@ -475,7 +475,7 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
           }
 
           // episode number
-          if (episode.contains("number") && episode.at("number"))
+          if (episode.contains("number") && episode.at("number").is_number_integer())
           {
             const int episodeNum{episode.at("number")};
             tag.SetEpisodeNumber(episodeNum);
@@ -484,8 +484,8 @@ PVR_ERROR PlutotvData::GetEPGForChannel(int channelUid,
 
           // series title / episode name
           if (episode.contains("series") && episode.at("series").contains("name") &&
-              episode.at("series").at("name") && episode.contains("name") &&
-              episode.at("name"))
+              episode.at("series").at("name").is_string() && episode.contains("name") &&
+              episode.at("name").is_string())
           {
             // series title
 
