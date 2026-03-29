@@ -11,23 +11,39 @@ This is the Pluto.tv PVR client addon for [Kodi](https://kodi.tv). It provides K
 
 When building the add-on you have to use the correct branch depending on which version of Kodi you're building against.
 If you want to build the add-on to be compatible with the latest kodi `master` commit, you need to checkout the branch with the current kodi codename.
-Also make sure you follow this README from the branch in question.
+The addon `inputstream.adaptive` must be built at the same time. Also make sure you follow this README from the branch in question.
 
 ### Linux
 
-The following instructions assume you will have built Kodi already in the `kodi-build` directory
-suggested by the README.
+The following instructions assume you will not have built Kodi already in the `kodi-build` directory
+suggested by the README, as `inputstream.adaptive` must be built also. Please refer to the build link section on prerequisites for building Kodi from source.
 
-1. `git clone --branch master https://github.com/xbmc/xbmc.git`
-2. `git clone --branch Nexus https://github.com/kodi-pvr/pvr.plutotv.git`
-3. `cd pvr.plutotv && mkdir build && cd build`
-4. `cmake -DADDONS_TO_BUILD=pvr.plutotv -DADDON_SRC_PREFIX=../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../../xbmc/kodi-build/addons -DPACKAGE_ZIP=1 ../../xbmc/cmake/addons`
-5. `make`
+1. `cd $HOME`
+2. `sudo git clone --branch Piers https://github.com/xbmc/xbmc.git`
+3. `sudo mkdir kodi-build`
+4. `cd kodi-build`
+5. `sudo cmake ../kodi -DCMAKE_INSTALL_PREFIX=/usr/local -DCORE_PLATFORM_NAME=x11 -DAPP_RENDER_SYSTEM=gl -DENABLE_INTERNAL_FFMPEG=ON`
+6. `cd $HOME`
+7. `sudo git clone --branch Piers https://github.com/xbmc/inputstream.adaptive`
+8. `sudo git clone --branch Piers https://github.com/kodi-pvr/pvr.plutotv`
+9. `cd inputstream.adaptive && sudo mkdir build && cd build`
+10. `sudo cmake -DADDONS_TO_BUILD=inputstream.adaptive -DADDON_SRC_PREFIX=../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../../kodi-build/addons -DPACKAGE_ZIP=1 ../../kodi/cmake/addons`
+11. `sudo make`
+12. `cd $HOME`
+13. `cd pvr.plutotv && sudo mkdir build && cd build`
+14. `sudo cmake -DADDONS_TO_BUILD=pvr.plutotv -DADDON_SRC_PREFIX=../.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../../kodi-build/addons -DPACKAGE_ZIP=1 ../../kodi/cmake/addons`
+15. `sudo make`
+16. `cd $HOME/kodi-build`
+17. `sudo cmake --build . -j$(getconf _NPROCESSORS_ONLN)`
+18. `./kodi-x11`
 
-The addon files will be placed in `../../xbmc/kodi-build/addons` so if you build Kodi from source and run it directly 
+
+The addon files will be placed in `$HOME/kodi-build/addons` so if you build Kodi from source and run it directly 
 the addon will be available as a system addon.
 
 ##### Useful links
 
 * [Kodi's PVR user support](https://forum.kodi.tv/forumdisplay.php?fid=167)
+* [Kodi's Development Wiki](https://kodi.wiki/view/Development)
 * [Kodi's PVR development support](https://forum.kodi.tv/forumdisplay.php?fid=136)
+* [Kodi's build link](https://github.com/xbmc/xbmc/blob/master/docs/README.Linux.md)
